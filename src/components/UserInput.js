@@ -105,13 +105,14 @@ class UserInput extends Component {
   )
 
   _renderSendOrFileIcon() {
-    if (this.state.inputHasText) {
-      return (
-        <div className="sc-user-input--button">
-          <SendIcon onClick={this._submitText.bind(this)} />
-        </div>
-      );
-    } else if (this.props.showFilePicker) {
+    if (this.props.showFilePicker) {
+      if (this.state.inputHasText) {
+        return (
+          <div className="sc-user-input--button">
+            <SendIcon onClick={this._submitText.bind(this)} />
+          </div>
+        );
+      }
       return (
         <div className="sc-user-input--button">
           <FileIcon onClick={this._showFilePicker.bind(this)} />
@@ -124,9 +125,12 @@ class UserInput extends Component {
           />
         </div>
       );
-    } else {
-      return null;
     }
+    return (
+      <div className="sc-user-input--button">
+        <SendIcon onClick={this._submitText.bind(this)} />
+      </div>
+    )
   }
 
   render() {
